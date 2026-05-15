@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M Hub - Movie Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Navigation -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">M Hub</h1>
+                <p class="tagline">Discover Amazing Movies</p>
+            </div>
+            <!-- Admin Controls -->
+            <div class="admin-controls">
+                <button id="adminBtn" class="admin-btn" onclick="toggleLoginModal()">Admin Login</button>
+                <button id="logoutBtn" class="logout-btn" onclick="logout()" style="display: none;">Logout</button>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Search movie title..."
+                >
+                <button class="search-btn" onclick="searchMovies()">Search</button>
+            </div>
+        </section>
+
+        <!-- Movies List -->
+        <section class="movies-section">
+            <div id="moviesGrid" class="movies-grid">
+                <!-- Movie cards will be generated dynamically -->
+            </div>
+        </section>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <p>No movies found</p>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="toggleLoginModal()">&times;</span>
+            <h2>Admin Login</h2>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="adminPassword">Password:</label>
+                    <input type="password" id="adminPassword" required placeholder="Enter admin password">
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Movie Modal -->
+    <div id="movieModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="toggleMovieModal()">&times;</span>
+            <h2 id="movieModalTitle">Add New Movie</h2>
+            
+            <form id="movieForm" onsubmit="saveMovie(event)">
+                <input type="hidden" id="movieId">
+                
+                <div class="form-group">
+                    <label for="movieTitle">Movie Title:</label>
+                    <input type="text" id="movieTitle" required placeholder="Enter movie title">
+                </div>
+
+                <div class="form-group">
+                    <label for="movieYear">Year:</label>
+                    <input type="number" id="movieYear" required placeholder="e.g., 2023" min="1800" max="2099">
+                </div>
+
+                <div class="form-group">
+                    <label for="movieRating">Rating:</label>
+                    <input type="text" id="movieRating" required placeholder="e.g., 8.5/10">
+                </div>
+
+                <div class="form-group">
+                    <label for="movieDescription">Description:</label>
+                    <textarea id="movieDescription" required placeholder="Enter movie description" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="movieImageUrl">Image URL:</label>
+                    <input type="text" id="movieImageUrl" placeholder="Paste image URL" required>
+                </div>
+
+                <div class="form-group" id="imagePreview" style="display: none;">
+                    <img id="previewImg" style="max-width: 100%; max-height: 200px; border-radius: 5px;">
+                </div>
+
+                <button type="submit" class="submit-btn">Save Movie</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
